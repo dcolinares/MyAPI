@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.IO;
 using ClosedXML.Excel;
 using MyAPI.Model;
-using DocumentFormat.OpenXml.Office2010.Word.DrawingShape;
 
 namespace MyAPI.Controllers
 {
