@@ -17,20 +17,10 @@ namespace MyAPI.APITest
         private HttpClient _http;
         private IJSRuntime _jsRuntime;
 
-        //public DownloadControllerTests(HttpClient http, IJSRuntime jSRuntime)
-        //{
-        //    _http = http;
-        //    _jsRuntime = jSRuntime;
-        //}
-
         [SetUp]
         public void SetUp()
         {
             var jsRuntimeMock = new Mock<IJSRuntime>();
-            //jsRuntimeMock.Setup(j => j.InvokeVoidAsync(It.IsAny<string>(), It.IsAny<object[]>()))
-            //    .Returns(ValueTask.CompletedTask);
-            //_controller = new DownloadController();
-            //_jsRuntime = jsRuntimeMock.Object;
             _controller = new DownloadController();
             _http = new HttpClient();
             _jsRuntime = jsRuntimeMock.Object;
@@ -39,44 +29,23 @@ namespace MyAPI.APITest
         [Test]
         public void ExportPdf_ReturnsFileResult_WhenValidDataProvided()
         {
-        //    // Arrange: Create a sample list of contributions
-        //    var contributions = new List<ContributionModel>
-        //    {
-        //    new ContributionModel { ContributionID = 1, Name = "John Doe", Description = "Donation", DateReceived = DateTime.Now, Amount = 100 },
-        //    new ContributionModel { ContributionID = 2, Name = "Jane Smith", Description = "Sponsorship", DateReceived = DateTime.Now, Amount = 250 }
-        //};
+            // Arrange: Create a sample list of contributions
+            var contributions = new List<ContributionModel>
+            {
+            new ContributionModel { ContributionID = 1, Name = "John Doe", Description = "Donation", DateReceived = DateTime.Now, Amount = 100 },
+            new ContributionModel { ContributionID = 2, Name = "Jane Smith", Description = "Sponsorship", DateReceived = DateTime.Now, Amount = 250 }
+        };
 
-        //    string fileName = "TestReport.pdf";
+            string fileName = "TestReport.pdf";
 
-        //    // Act: Call the API method
-        //    var result = _controller.ExportPdf(contributions, fileName) as FileContentResult;
+            // Act: Call the API method
+            var result = _controller.DownloadPDF(contributions, fileName) as FileStreamResult;
 
-        //    // Assert: Check if the response is valid
-        //    Assert.That(result, Is.Not.Null);
-        //    Assert.That(result.ContentType, Is.EqualTo("application/pdf"));
-        //    Assert.That(result.FileDownloadName, Is.EqualTo(fileName));
-        //    Assert.That(result.FileContents.Length, Is.GreaterThan(0), "PDF file should not be empty.");
-        }
-
-        [Test]
-        public void GeneratePDF_ReturnsValidByteArray()
-        {
-            //// Arrange
-            //var contributions = new List<ContributionModel>
-            //{
-            //    new ContributionModel { ContributionID = 1, Name = "Alice", Description = "Charity", DateReceived = DateTime.Now, Amount = 500 },
-            //    new ContributionModel { ContributionID = 2, Name = "Bob", Description = "Donation", DateReceived = DateTime.Now, Amount = 300 }
-            //};
-
-            //// Act
-            //var pdfBytes = _controller.GeneratePDF(contributions);
-
-            //// Assert
-            //Assert.That(pdfBytes, Is.Not.Null);
-            //Assert.That(pdfBytes.Length, Is.GreaterThan(0), "PDF file should not be empty.");
-
-            //// Optionally, save to file for manual verification
-            //System.IO.File.WriteAllBytes("TestGenerated.pdf", pdfBytes);
+            // Assert: Check if the response is valid
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.ContentType, Is.EqualTo("application/pdf"));
+            Assert.That(result.FileDownloadName, Is.EqualTo(fileName));
+            Assert.That(result.FileStream.Length, Is.GreaterThan(0), "PDF file should not be empty.");
         }
 
         [Test]
