@@ -1,6 +1,7 @@
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.EntityFrameworkCore;
 using MyAPI.Application;
+using MyAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ContributionService>();
+builder.Services.AddScoped<WithdrawService>();
+builder.Services.AddScoped<Service>();
 
 var app = builder.Build();
 

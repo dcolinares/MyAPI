@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
-namespace PundoPH.Model
+namespace MyAPI.Model
 {
-    public class User
+    public class UserModel
     {
         [Key]
         public int Id { get; set; }
